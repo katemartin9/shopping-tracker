@@ -1,7 +1,7 @@
 import cv2
 from skimage.filters import threshold_local
-from image.transform import four_point_transform
-from image.detect import detect_edges, detect_frame
+from image_processing import four_point_transform
+from image_processing import detect_edges, detect_frame
 
 image = cv2.imread('../static/receipt2.jpg')
 edges = detect_edges(image)
@@ -10,7 +10,7 @@ frame = detect_frame(edges)
 
 image_copy = image.copy()
 cv2.drawContours(image=image_copy, contours=[frame], contourIdx=-1, color=(0, 255, 0), thickness=2)
-cv2.imwrite('contours.jpg', image_copy)
+cv2.imwrite('../outputs/contours.jpg', image_copy)
 
 ratio = image.shape[0] / 500.0
 orig_image = image.copy()

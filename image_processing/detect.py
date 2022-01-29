@@ -16,11 +16,10 @@ def convert_to_grey_blur(image):
 
 def detect_frame(edges):
     contours = cv2.findContours(edges.copy(), mode=cv2.RETR_LIST, method=cv2.CHAIN_APPROX_SIMPLE)
-    cnts = imutils.grab_contours(contours)
-    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:5]
-
-    for c in cnts:
-        peri = cv2.arcLength(c, True)
-        approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+    contours = imutils.grab_contours(contours)
+    contours = sorted(contours, key=cv2.contourArea, reverse=True)[:5]
+    for cnt in contours:
+        peri = cv2.arcLength(cnt, True)
+        approx = cv2.approxPolyDP(cnt, 0.02 * peri, True)
         if len(approx) == 4:
             return approx
