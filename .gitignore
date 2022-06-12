@@ -130,3 +130,5 @@ dmypy.json
 info.txt
 .idea/
 */.DS_Store
+.flaskenv
+.db

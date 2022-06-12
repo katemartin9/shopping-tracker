@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Shopping List</title>
+    </head>
+<body>
+<h1>Is this correct?</h1>
+ {% for listing in shopping_list %}
+  <div>
+      <p>{{ listing.item }} : <b>{{ listing.price }}</b></p>
+  </div>
+ {% endfor %}
+</body>
