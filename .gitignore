@@ -131,4 +131,5 @@ info.txt
 .idea/
 */.DS_Store
 .flaskenv
-.db
+*.db
+*.jpg
