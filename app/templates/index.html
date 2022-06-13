@@ -4,10 +4,19 @@
         <title>Shopping List</title>
     </head>
 <body>
-<h1>Is this correct?</h1>
- {% for listing in shopping_list %}
+    <h1>Is this correct?</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+        <input name="shopName" type="text" value="{{ form.shop_name }}">
+        <input name="purchaseDate" type="text" value="{{ form.purchase_date }}">
+        </div>
+    {% for item in form.items %}
   <div>
-      <p>{{ listing.item }} : <b>{{ listing.price }}</b></p>
+      <input name="name" type="text" value="{{ item.name }}">
+      <input name="price" type="text" value="{{item.price }}">
   </div>
  {% endfor %}
+ <p>{{ form.submit() }}</p>
+    </form>
 </body>

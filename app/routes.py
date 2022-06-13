@@ -10,22 +10,35 @@ from werkzeug.urls import url_parse
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    shop_name = {'shop_name': 'M&S'}
-    purchase_date = {'purchase_date': '11-06-2022'}
-    shopping_list = [
-        {
-            'item': 'bananas',
-            'price': '2.20'
-        },
-        {
-            'item': 'milk',
-            'price': '1.10'
-        }
-    ]
-    return render_template('index.html',
-                           shop=shop_name,
-                           shopping_list=shopping_list,
-                           purchase_date=purchase_date)
+    receipts = True  # TODO: check corresponding folder for data
+    if request.method == 'GET' and receipts:
+        form = ShoppingListForm()
+        form.purchase_date = '11-06-2022' # TODO: make dynamic
+        form.shop_name = 'M&S'
+        form.items = [
+            {
+                'name': 'bananas',
+                'price': '2.20'
+            },
+            {
+                'name': 'milk',
+                'price': '1.10'
+            }
+        ]
+        return render_template('index.html', form=form)
+    elif request.method == 'POST':
+        print(request.form)
+        # TODO: save to db
+        """
+        shopping_list = ShoppingList(
+            form.data
+        )
+        db.session.add_all(shopping_list)
+        db.session.commit()
+        """
+        return redirect(url_for('index'))
+    else:
+        return render_template('statistics_page.html')  # replace with the statistics page
 
 
 @app.route('/login', methods=['GET', 'POST'])
