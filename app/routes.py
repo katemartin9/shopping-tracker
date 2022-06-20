@@ -4,13 +4,14 @@ from app.forms import ShoppingListForm, LoginForm
 from app.models import User, ShoppingList
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from utils import check_if_not_empty_folder, files_generator
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    receipts = True  # TODO: check corresponding folder for data
+    receipts = check_if_not_empty_folder(current_user.username)
     if request.method == 'GET' and receipts:
         form = ShoppingListForm()
         form.purchase_date = '11-06-2022' # TODO: make dynamic
